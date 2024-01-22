@@ -24,21 +24,23 @@ def create_tridiagonal_matrix(n,e):
     N=(2**n)-1
     h=2**(-n)
     A= pd.DataFrame(np.zeros((N,N)))
-    
+    F= pd.DataFrame(np.zeros((N,1)))
     for i in range(0,N):
         for j in range(0,N):
             if abs(i-j)>1:
-                A[i][j]=0
+                A.iloc[i,j]=0
             elif i==j:
-                A[i][j]=(2*e+h**2)/(h**2)
+                A.iloc[i,j]=(2*e+h**2)/(h**2)
             else:
-                A[i][j]=(-e)/(h**2)
+                A.iloc[i,j]=(-e)/(h**2)
+        F.iloc[i,0]=2*(i+1)*h+1
     AT=A.transpose()
     print(f"n is {n}, N is {N},e is {e},h is {h}")
     print(A)
+    print(F)
     if A.equals(AT):        
-        print("Matrix is symmetric")        
+        print("Matrix A is symmetric")        
     else:
-        print("Matrix is not symmetric")
+        print("Matrix A is not symmetric")
       
-    return(A)
+    return(A,F)
