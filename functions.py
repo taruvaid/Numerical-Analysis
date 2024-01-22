@@ -78,3 +78,22 @@ def forward_subst(L,F,N):
         y.iloc[i]=F.iloc[i]-s
     
     return(y)
+
+
+#backward substitution - parameters U = upper traingular matrix (diagonal not necessarily 1),
+#y = result from Ly=F, and N = size of matrix
+def backward_subst(U,y,N):
+    x= pd.DataFrame(np.zeros((N,1)))
+    x.iloc[N-1]= y.iloc[N-1]/U.iloc[N-1,N-1]
+    i=N-2
+    while i>=0:        
+        j=N-1
+        s=0
+        while j>i:        
+           s = s+ x.iloc[j]*U.iloc[i,j]
+           j-=1
+        x.iloc[j]=(y.iloc[i]-s)/U.iloc[i,j]
+        i-=1
+        
+    
+    return(x)
