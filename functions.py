@@ -1,20 +1,25 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jan 17 06:36:26 2024
+Created on Wed Jan 17 08:18:42 2024
 
 @author: tvaid
 """
 
-## This code contains examples of how to solve a system of linear equations
-## the problem we are looking at is of the form Ax=B
+#this file contains list of packages and their version
 
-
+# pip install numpy==1.23.1
 import numpy as np
-import pandas as pd
-#print(np.cos(90))
-#print(np.inf)
+print("imported numpy as np")
+import pandas as pd 
+import matplotlib as mlt 
 
-#### PROBLEM 4 - tridiagonal matrix
+print ('imported requirements successfully')
+
+def my_multiply(x,y):
+    mysum=x**y
+    print("in my_multiply function")
+    return mysum
+
 def create_tridiagonal_matrix(N,e,h):
     A= pd.DataFrame(np.zeros((N,N)))
     
@@ -36,7 +41,3 @@ def create_tridiagonal_matrix(N,e,h):
       
     return(A)
 A= create_tridiagonal_matrix(5,1,2)
-n=4
-L = [[0.0] * n for i in range(n)]
-
-
