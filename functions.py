@@ -43,4 +43,4 @@ def create_tridiagonal_matrix(n,e):
     else:
         print("Matrix A is not symmetric")
       
-    return(A,F)
+    return(A,F,N)
