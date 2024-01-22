@@ -16,29 +16,33 @@ import functions as ftv
 
 #### PROBLEM 4 - tridiagonal matrix
 
-A,F,N = ftv.create_tridiagonal_matrix(2,10**(-3))
+#A,F,N = ftv.create_tridiagonal_matrix(2,10**(-3))
 
-B=pd.DataFrame({'a':[1,2,3],'b':[4,5,6],'c':[7,8,9]})
+B=pd.DataFrame({'a':[1,2,11,12],'b':[4,5,6,7],'c':[7,8,9,10],'d':[10,11,12,13]})
 print(B)
 def LP_decomp(M_original,N):   
-    A = M_original.copy()
+    U = M_original.copy()
     L= pd.DataFrame(np.zeros((N,N)))
     L.iloc[0,0]=1
-    p=0
-    for i in range(1,N):
-        L.iloc[i,p]= A.iloc[i,i-1]/A.iloc[i-1,i-1]
-        for j in range(0,N):
-            print(f"i : {i}, j : {j}")
-            print(A.iloc[i,j], A.iloc[i-1,j],L.iloc[i,p],A.iloc[i-1,j]*L.iloc[i,p])
-            A.iloc[i,j]=A.iloc[i,j] - A.iloc[i-1,j]*L.iloc[i,p]
-            
-        p+=1
-    return(L,A)
+    for p in range(0,N-1):
+        for i in range(p+1,N):
+            print(f'p =={p}')
+            print(U,"\n")
+            L.iloc[i,p]= U.iloc[i,p]/U.iloc[p,p]
+            L.iloc[i,i]=1
+            for j in range(0,N):
+                print(f"i : {i}, j : {j}")
+                print("parameter values - ")
+                print(U.iloc[i,j], U.iloc[i-1,j],L.iloc[i,p],U.iloc[i-1,j]*L.iloc[i,p],"\n")
+                U.iloc[i,j]=U.iloc[i,j] - U.iloc[p,j]*L.iloc[i,p]
+                
+                
+    return(L,U)
             
         
 
 
-l,C = LP_decomp(B,3)
+L,U = LP_decomp(B,4)
 
 
 
