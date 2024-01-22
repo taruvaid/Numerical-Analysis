@@ -65,3 +65,16 @@ def LP_decomp(M_original,N):
                 
                 
     return(L,U)
+#forward substitution - parameters L = lower triangular matriz, F= output values , N = matrix size
+def forward_subst(L,F,N):
+    y= pd.DataFrame(np.zeros((N,1)))
+    y.iloc[0]= F.iloc[0]
+    for i in range(0,N):
+        j=0  
+        s=0
+        while j<i:        
+           s = s+ y.iloc[j]*L.iloc[i,j]
+           j+=1
+        y.iloc[i]=F.iloc[i]-s
+    
+    return(y)
