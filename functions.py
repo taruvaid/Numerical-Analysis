@@ -20,6 +20,7 @@ def my_multiply(x,y):
     print("in my_multiply function")
     return mysum
 
+## create a tridiagonal matrix
 def create_tridiagonal_matrix(n,e):
     N=(2**n)-1
     h=2**(-n)
@@ -44,3 +45,23 @@ def create_tridiagonal_matrix(n,e):
         print("Matrix A is not symmetric")
       
     return(A,F,N)
+
+## LU decomposition
+def LP_decomp(M_original,N):   
+    U = M_original.copy()
+    L= pd.DataFrame(np.zeros((N,N)))
+    L.iloc[0,0]=1
+    for p in range(0,N-1):
+        for i in range(p+1,N):
+            print(f'p =={p}')
+            print(U,"\n")
+            L.iloc[i,p]= U.iloc[i,p]/U.iloc[p,p]
+            L.iloc[i,i]=1
+            for j in range(0,N):
+                print(f"i : {i}, j : {j}")
+                print("parameter values - ")
+                print(U.iloc[i,j], U.iloc[i-1,j],L.iloc[i,p],U.iloc[i-1,j]*L.iloc[i,p],"\n")
+                U.iloc[i,j]=U.iloc[i,j] - U.iloc[p,j]*L.iloc[i,p]
+                
+                
+    return(L,U)
