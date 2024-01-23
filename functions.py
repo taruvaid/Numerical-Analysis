@@ -97,3 +97,12 @@ def backward_subst(U,y,N):
         
     
     return(x)
+#function to create a matrix for polynial p(t)=a0 + a1t+a1t^2...a(n-1)t^(n-1)
+def polynomial_matrix(N):
+    A= pd.DataFrame(np.zeros((N,N)))
+    B= pd.DataFrame(np.zeros((N,1)))
+    for i in range(0,N):
+        for j in range(0,N): 
+            A.iloc[i,j]=(2+i)**(j)
+        B.iloc[i,0]=((2+i)**N -1)/(i+1)
+    return(A,B)

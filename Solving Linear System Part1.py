@@ -18,7 +18,7 @@ import functions as ftv
 
 #B=pd.DataFrame({'a':[1,2,11,12],'b':[4,5,6,7],'c':[7,8,9,10],'d':[10,11,12,13]})
 #print(B)
-n=6
+n=2
 e=10**(-3)
 #matrix function takes n and e as inputs
 A,F,N = ftv.create_tridiagonal_matrix(n,e)  
