@@ -11,8 +11,17 @@ import matplotlib.pyplot as plt
 import functions as ftv
 
 #PROBLEM 5
-n=4
-A,B = ftv.polynomial_matrix(n)
+N=4
+A,B = ftv.polynomial_matrix(N)
+
+#LU decomposition function takes the Matrix and N as inputs      
+L,U = ftv.LP_decomp(A,N)
+    
+#forward substitution    
+y=ftv.forward_subst(L, B, N)
+
+#backward substitution
+u=ftv.backward_subst(U,y,N)
         
         
         
