@@ -13,8 +13,8 @@ import functions as ftv
 #PROBLEM 5
 
 
-result =  pd.DataFrame(np.zeros((20,1)))
-for i in range(0,3):
+result =  []
+for i in range(0,17):
     N=4+i
     A,B = ftv.polynomial_matrix(N)
 
@@ -26,8 +26,9 @@ for i in range(0,3):
 
     #backward substitution
     u=ftv.backward_subst(U,y,N)
-    result=result.merge(u,how='left') 
-    print(u)
+  
+    u_ls=u.values.tolist()
+    result.append(u_ls)
     
 
         
