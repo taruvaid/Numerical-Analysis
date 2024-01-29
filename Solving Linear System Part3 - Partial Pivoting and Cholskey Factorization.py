@@ -4,9 +4,52 @@ Created on Thu Jan 25 06:36:49 2024
 
 @author: tvaid
 """
-1. Partial Pivoting
-2. LU factorization - Doolittle's method
-3. LU factorization - Crout's method
-4. LU factorization - Cholseky method
-5. Is a matrix positive definite? 
-6. If it is, then find a symmetric matrix with the same quadratic form
+
+import numpy as np
+import pandas as pd 
+import matplotlib as mlt 
+import math
+
+#1. Partial Pivoting
+#2. LU factorization - Doolittle's method
+#3. LU factorization - Crout's method
+#4. LU factorization - Cholseky method
+#5. Is a matrix positive definite? 
+#6. If it is, then find a symmetric matrix with the same quadratic form
+
+
+## Code to perform Cholesky factorization...
+A = [[4,12,-16],[12,37,-43],[-16,-43,98]]
+A = [[2,-1,0,0],[-1,2,-1,0],[0,-1,2,-1],[0,0,-1,2]]
+A = pd.DataFrame(A)
+def cholesky_factorization (A):
+    """A = symmetric positive definite matrix
+       A = L*Transpose(L)
+       Function returns L """
+    n=A.shape[0]
+    print(f'matrix dimensions {A.shape[0]} x {A.shape[1]}')
+    L = pd.DataFrame(np.zeros((n,n)))
+    L.iloc[0,0]=math.sqrt(A.iloc[0,0])
+    
+    for i in range(0,n):
+        for j in range(1,n): 
+            if i==0:
+                L.iloc[j,i]= A.iloc[i,j]/L.iloc[0,0]
+            elif i==j:
+                s=0
+                for k in range(0,i):
+                    s=s+L.iloc[i,k]**2
+                L.iloc[i,i]=math.sqrt(A.iloc[i,i]-s)
+            else:
+                s=0
+                for k in range(0,n-1):
+                    s=s+L.iloc[i,k]*L.iloc[j,k]
+                #L.iloc[j,i]=(A.iloc[i,j]-s)/L.iloc[j-1,j-1] 
+                print(L.iloc[j-1,j-1])
+ 
+    
+    return(L,s)
+
+
+L,s = cholesky_factorization(A)
+    
