@@ -1,3 +1,4 @@
+#Code to create a harmonograph https://en.wikipedia.org/wiki/Harmonograph
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -17,9 +18,9 @@ for t in range(1,50):
     
 
 
-# plt.plot(x,y,'k',linewidth=.1)
-# plt.axis('off')
-# plt.show()
+plt.plot(x,y,'k',linewidth=.1)
+plt.axis('off')
+plt.show()
 
 
 #Solution 2
@@ -36,9 +37,7 @@ x = (A1*np.sin(t*f1+p1))*np.exp(-d1*t) + A2*np.sin(t*f2+p2)*np.exp(-d2*t)
 y = (A3*np.sin(t*f3+p3))*np.exp(-d3*t) + A4*np.sin(t*f4+p4)*np.exp(-d4*t)
     
 
-# plt.plot(x,y,'k',linewidth=.1)
-# plt.axis('off')
-# plt.show()
-
-plt.plot(np.sin(t*f[0])*np.exp(-d[0]*5*t),linewidth=.5)
+plt.plot(x,y,'k',linewidth=.1)
+plt.axis('off')
 plt.show()
+
