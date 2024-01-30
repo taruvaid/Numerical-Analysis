@@ -10,12 +10,7 @@ import pandas as pd
 import matplotlib as mlt 
 import math
 
-#1. Partial Pivoting
-#2. LU factorization - Doolittle's method
-#3. LU factorization - Crout's method
-#4. LU factorization - Cholseky method
-#5. Is a matrix positive definite? 
-#6. If it is, then find a symmetric matrix with the same quadratic form
+
 
 
 ## Code to perform Cholesky factorization...
