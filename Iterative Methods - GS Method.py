@@ -50,30 +50,29 @@ def jacobi_method(A,b,K,z):
     
     table = [[0,0,0,0,1,1]]
     table = pd.DataFrame(table, columns=['Iteration', 'x1','x2','x3','e_max','e_ratio'])
-    #create L+ U
-    LU = A.copy()
-    for i in range(0,n):
-        LU.iloc[i,i]=0
     
-        #start iterations
+    #start iterations
     for k in range(0,K):
         k+=1
         
         e_max_old = e_max 
         
         #result stores output value of x for iterantions
-        result= -LU.dot(x) + b
-    
         for i in range(0,n):
-            result.iloc[i,0] =  result.iloc[i,0]/A.iloc[i,i]
+            sum = 0
+            for j in range(0,n):
+                if i!=j:
+                   sum += A.iloc[i,j]*x.iloc[j,0]
+            x.iloc[i,0]= (b.iloc[i,0] - sum )/A.iloc[i,i]
             
-        x = result.copy()
+       
         e = z-x
         
         #infinity norm on one column matrix
-        for i in range(0,n-1): 
-            if abs(e.iloc[i,0])> abs(e.iloc[i+1,0]):
-                e_max = abs(e.iloc[i,0])
+        e_max = abs(e.iloc[0,0])
+        for i in range(0,n-1):             
+            if e_max > abs(e.iloc[i+1,0]):
+                print('emax is larger',e_max)
             else:
                 e_max = abs(e.iloc[i+1,0])
             
@@ -94,10 +93,10 @@ def jacobi_method(A,b,K,z):
         df = pd.DataFrame (df,columns=['Iteration', 'x1','x2','x3','e_max','e_ratio'])
         table = pd.concat([table,df],axis=0)
         
-    return x,LU,e,table
+    return x,e,table
        
     
-x,LU, e,table =  jacobi_method(A, b,10,z)
+x, e,table =  jacobi_method(A, b,10,z)
 print(table)
           
 #compare with wikipedia solution https://en.wikipedia.org/wiki/Jacobi_method

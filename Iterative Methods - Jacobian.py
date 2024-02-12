@@ -71,9 +71,10 @@ def jacobi_method(A,b,K,z):
         e = z-x
         
         #infinity norm on one column matrix
-        for i in range(0,n-1): 
-            if abs(e.iloc[i,0])> abs(e.iloc[i+1,0]):
-                e_max = abs(e.iloc[i,0])
+        e_max = abs(e.iloc[0,0])
+        for i in range(0,n-1):             
+            if e_max > abs(e.iloc[i+1,0]):
+                print('emax is larger',e_max)
             else:
                 e_max = abs(e.iloc[i+1,0])
             
