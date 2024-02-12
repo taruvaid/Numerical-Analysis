@@ -12,7 +12,9 @@ import matplotlib as mlt
 import math
 
 
-##GS METHOD
+
+#### SOR - Sucessive Overrelaxation Method
+#w= 8 - 3 (7^0.5)
 
 A = [[3,1,0],[1,3,1],[0,1,3]]
 b = [[4],[5],[4]]
@@ -21,7 +23,7 @@ A = pd.DataFrame(A)
 b = pd.DataFrame(b)
 z = pd.DataFrame(z)
 
-def gauss_seidal_method(A,b,K,z):
+def sor_method(A,b,K,z):
     '''Solving a linear system given by Ax=b using the Jacobi Iterative method
     Applicable for square matrices with onon zero diagonal elements
     K = number of iterations
@@ -80,8 +82,11 @@ def gauss_seidal_method(A,b,K,z):
     return x,e,table
        
     
-x, e,table =  gauss_seidal_method(A, b,10,z)
+x, e,table =  sor_method(A, b,10,z)
 print(table)
           
+
+
+
 
 

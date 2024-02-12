@@ -103,9 +103,5 @@ print(table)
           
 #compare with wikipedia solution https://en.wikipedia.org/wiki/Jacobi_method
 
-#### GAUSS-SEIDAl METHOD
 
-
-#### SOR - Sucessive Overrelaxation Method
-#w= 8 - 3 (7^0.5)
 
