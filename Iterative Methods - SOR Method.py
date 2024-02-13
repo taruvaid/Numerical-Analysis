@@ -14,7 +14,7 @@ import math
 
 
 #### SOR - Sucessive Overrelaxation Method
-#w= 8 - 3 (7^0.5)
+w= 8 - 3 *(7**0.5)
 
 A = [[3,1,0],[1,3,1],[0,1,3]]
 b = [[4],[5],[4]]
@@ -23,14 +23,17 @@ A = pd.DataFrame(A)
 b = pd.DataFrame(b)
 z = pd.DataFrame(z)
 
-def sor_method(A,b,K,z):
+def sor_method(A,b,K,z,w):
     '''Solving a linear system given by Ax=b using the Jacobi Iterative method
     Applicable for square matrices with onon zero diagonal elements
     K = number of iterations
-    z=correct solution of linear system'''
+    z=correct solution of linear system
+    w = relaxation parameter SOR
+    result = containts results of the iteration'''
     
     n = A.shape[0] #size of matrix
     x = pd.DataFrame(np.zeros((n,1)))
+    result = pd.DataFrame(np.zeros((n,1)))
     e = pd.DataFrame(np.zeros((n,1))) #error
     e_max  = 1
     
@@ -47,11 +50,13 @@ def sor_method(A,b,K,z):
         for i in range(0,n):
             sum = 0
             for j in range(0,n):
-                if i!=j:
-                   sum += A.iloc[i,j]*x.iloc[j,0]
-            x.iloc[i,0]= (b.iloc[i,0] - sum )/A.iloc[i,i]
-            
-       
+                if i<=j: 
+                    sum += A.iloc[i,j]*x.iloc[j,0]
+                else:
+                    sum += A.iloc[i,j]*result.iloc[j,0]
+            result.iloc[i,0] = x.iloc[i,0]- (w*(-b.iloc[i,0] + sum )/A.iloc[i,i])
+           
+        x = result.copy()
         e = z-x
         
         #infinity norm on one column matrix
@@ -78,11 +83,12 @@ def sor_method(A,b,K,z):
         df = [[k,x.iloc[0,0],x.iloc[1,0],x.iloc[2,0],e_max,e_ratio]]
         df = pd.DataFrame (df,columns=['Iteration', 'x1','x2','x3','e_max','e_ratio'])
         table = pd.concat([table,df],axis=0)
+        print("value of w is: ",w)
         
     return x,e,table
        
     
-x, e,table =  sor_method(A, b,10,z)
+x, e,table =  sor_method(A, b,10,z,w)
 print(table)
           
 
