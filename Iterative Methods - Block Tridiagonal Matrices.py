@@ -41,8 +41,12 @@ def jacobi_method(A, b, x0, tol=1e-2, max_iter=100):
             x_new[i] = (b[i] - np.dot(A[i], x) + A[i, i] * x[i]) / A[i, i]
         
         #https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html
-        residual = np.linalg.norm(b - np.dot(A, x_new), ord=1)
+        residual = np.linalg.norm(b - np.dot(A, x_new), ord=2)
         residuals.append(residual)
+        
+        print("iteration no - ", k)
+        print('value of x')
+        print(x)
         
         if residual < tol:
             break
@@ -56,7 +60,7 @@ def jacobi_method(A, b, x0, tol=1e-2, max_iter=100):
 k_jacobi, residual_jacobi, ratio_jacobi = jacobi_method(A, b, x0)
 print("Using Jacobi Method:")
 print("Iterations performed (k):", k_jacobi)
-print("Residual at final stage (kr(k)k1):", residual_jacobi)
+print("Residual at final stage :", residual_jacobi)
 print("Ratio of successive residual norms at final stage:", ratio_jacobi)
 
 
@@ -70,8 +74,12 @@ def gauss_seidel_method(A, b, x0, tol=1e-2, max_iter=100):
         for i in range(n):
             x[i] = (b[i] - np.dot(A[i, :i], x[:i]) - np.dot(A[i, i+1:], x[i+1:])) / A[i, i]
         
-        residual = np.linalg.norm(b - np.dot(A, x), ord=1)
+        residual = np.linalg.norm(b - np.dot(A, x), ord=2)
         residuals.append(residual)
+        
+        # print("iteration no - ", k)
+        # print('value of x')
+        # print(x)
         
         if residual < tol:
             break
@@ -83,5 +91,5 @@ def gauss_seidel_method(A, b, x0, tol=1e-2, max_iter=100):
 k_gs, residual_gs, ratio_gs = gauss_seidel_method(A, b, x0)
 print("\nGauss-Seidel Method:")
 print("Iterations performed (k):", k_gs)
-print("Residual at final stage (kr(k)k1):", residual_gs)
+print("Residual at final stage :", residual_gs)
 print("Ratio of successive residual norms at final stage:", ratio_gs)
