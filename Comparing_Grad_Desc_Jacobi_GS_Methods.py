@@ -8,17 +8,9 @@ This is a temporary script file.
 import numpy as np
 
 #create square matrix
-n = 32
-A = np.zeros([n,n])
-b = np.zeros([n,1])
-u = np.zeros([n,1])
-
-for row in range(0,n):
-    for col in range(0,n):
-        A[row,col] = 1/ (1 + (row + 1) + (col + 1))
-        b[row,0] = b[row,0] + A[row,col]
-    b[row,0] = b[row,0]/3
-    
+A = np.array([[10,1,2,3,4],[1,9,-1,2,-3],[2,-1,7,3,-5],[3,2,3,12,-1],[4,-3,-5,-1,15]])
+b = np.array([[12],[-27],[14],[-17],[12]])
+u=np.zeros([len(b),1])
 
 #Checking if the matrix is positive definite
 def is_pos_def(x):
@@ -32,7 +24,7 @@ def grad_desc (A,b,u):
     r = b - np.matmul(A,u)
     r_t = np.transpose(r) #transpose of residual
     
-    #for k in range (1,20000):
+    #for k in range (1,2):
     while (r_t.dot(r)>0.01):        
         #a_num = np.linalg.norm(r,2) #L2 norm
         a = (r_t.dot(r)) / (r_t.dot(A).dot(r))    
