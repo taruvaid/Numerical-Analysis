@@ -27,18 +27,27 @@ def is_pos_def(x):
 print("Matrix A is positive definite - ",is_pos_def(A))
 
 #Gradient Descent Algorithm
-def grad_desc (A,b,u):
+def grad_desc (A,b,u,e):
+    """Solving a linear system Au=b
+    error = e"""
     
     r = b - np.matmul(A,u)
     r_t = np.transpose(r) #transpose of residual
     
+    counter = 0 
+    
     #for k in range (1,20000):
-    while (r_t.dot(r)>0.01):        
+    while (r_t.dot(r)>e):    
+        
+        counter+=1
+        
         #a_num = np.linalg.norm(r,2) #L2 norm
         a = (r_t.dot(r)) / (r_t.dot(A).dot(r))    
         u = u + a*r
         r = b - np.matmul(A,u) #residual
         r_t = np.transpose(r) #transpose of residual
-    return(u,r)
+    return(u,r,counter)
 
-u,r = grad_desc (A,b,u)
+u,r,c = grad_desc (A,b,u,0.001)
+print(u)
+print(c)
