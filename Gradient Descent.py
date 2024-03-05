@@ -6,6 +6,8 @@ This is a temporary script file.
 """
 #import packages
 import numpy as np
+import pandas as pd
+
 
 #create square matrix
 n = 32
