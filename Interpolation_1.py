@@ -33,7 +33,7 @@ def lagrange_interpolation(x, points, func):
     return result
 
 # Plot the interpolation results for different values of n
-def plot_interpolation(n_values):
+def plot_summary(n_values):
     x_vals = np.linspace(-1, 1, 1000)
     plt.figure(figsize=(12, 6))
     
@@ -76,5 +76,5 @@ def plot_interpolation(n_values):
     plt.show()
 
 # Set the values of n for investigation
-n_values = [5, 10, 20, 40]
-plot_interpolation(n_values)
+n_values = [16]
+plot_summary(n_values)
